@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css'
-function Login() {
+function LoginComponent() {
     return (
         <>
             <section className="signupContainer py-5">
@@ -39,4 +39,4 @@ function Login() {
     )
 }
 
-export default Login
+export default LoginComponent

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Edit() {
+function EditComponent() {
     return (
         <>
             <section className="createContainer py-5">
@@ -44,4 +44,4 @@ function Edit() {
     )
 }
 
-export default Edit
+export default EditComponent

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Home.css'
-function Home() {
+function HomeComponent() {
     return (
         <>
             <section className="container-fluid home bg-danger ">
@@ -22,4 +22,4 @@ function Home() {
     )
 }
 
-export default Home
+export default HomeComponent

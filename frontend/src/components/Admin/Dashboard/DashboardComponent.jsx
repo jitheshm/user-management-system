@@ -1,6 +1,6 @@
 import React from 'react'
 import './Dashboard.css'
-function Dashboard() {
+function DashboardComponent() {
     return (
         <>
 
@@ -40,4 +40,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard
+export default DashboardComponent
