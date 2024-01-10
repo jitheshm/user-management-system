@@ -25,11 +25,11 @@ services:
      watch:
         - action: sync
           path: ./backend
-          target: //usr/src/app/
+          target: /usr/src/app/
           ignore:
             - node_modules/
         - action: rebuild
-          path: package.json
+          path: ./backend/package.json
 
     environment:
       NODE_ENV: production
@@ -45,10 +45,10 @@ services:
      watch:
         - action: sync
           path: ./frontend
-          target: //usr/src/app/
+          target: /usr/src/app/
           
         - action: rebuild
-          path: package.json
+          path: ./frontend/package.json
     environment:
       NODE_ENV: production
     ports:
