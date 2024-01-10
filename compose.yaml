@@ -8,6 +8,16 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
+  db:
+    image: "mongo:latest"
+    container_name: mongo
+    restart: always
+    command: mongod --port 27018
+    ports:
+      - "27018:27018"
+    networks:
+      - node-webapp-network
+
   server:
     build:
       context: ./backend
@@ -25,6 +35,9 @@ services:
       NODE_ENV: production
     ports:
       - 3000:3000
+    networks:
+      - node-webapp-network
+
   frontend:
     build:
       context: ./frontend
@@ -40,6 +53,12 @@ services:
       NODE_ENV: production
     ports:
       - 5173:5173
+    networks:
+      - node-webapp-network
+    
+networks:
+  node-webapp-network:
+    driver: bridge
     # volumes:
     #   - .:/app
     #   - /app/node_modules
