@@ -1,0 +1,11 @@
+.home{
+    min-height: 100vh;
+    /* background-color: darkgreen; */
+  }
+  .home .content{
+    min-height: 100vh;
+  }
+  .home .border{
+    border-style: dashed!important;
+    border-width: 2px!important;
+  }

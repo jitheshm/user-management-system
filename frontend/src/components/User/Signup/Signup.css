@@ -1,0 +1,14 @@
+.signupContainer{
+    min-height: 100vh;
+    /* background-color: darkgreen; */
+  }
+  input::file-selector-button{
+    background: transparent;
+    display: none;
+    width: inherit;
+    color: transparent;
+  }
+
+  input[type='file'] {
+    color: transparent;
+  }
