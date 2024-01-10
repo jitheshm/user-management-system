@@ -7,7 +7,7 @@ import Home from "./pages/User/Home";
 import Login from "./pages/User/Login";
 import Signup from "./pages/User/Signup";
 import Dashboard from "./pages/Admin/Dashboard";
-import LoginComponent from "./components/Admin/Login/LoginComponent";
+import AdminLogin from "./pages/Admin/Login";
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
     },
     {
       path: "/admin/login",
-      element: <LoginComponent />,
+      element: <AdminLogin/>,
     }
 
   ]);
