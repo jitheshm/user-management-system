@@ -76,7 +76,7 @@ module.exports = {
                         $set: {
                             name: data.name,
                             email: data.email,
-                            img:imageUrl?imageUrl:"",
+                            ...(imageUrl)?{img:imageUrl}:{},
                             ...(data.password!="")?{password:data.password}:{}
                             
                         }
