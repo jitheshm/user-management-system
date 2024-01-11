@@ -4,11 +4,17 @@ import axios from 'axios'
 import { BASEURL } from '../../../constants/constant.json'
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { verify } from '../../../features/user/userSlice'
+
 function LoginComponent() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(false)
+
+    const { name, verified } = useSelector((state) => state.user)
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
 
@@ -18,9 +24,10 @@ function LoginComponent() {
             password: password
         }).then((res) => {
             console.log(res.data);
-            if (res.data.status) {
-                console.log(res.data.token);
+            if (res.data.success) {
+                console.log(res.data.data.name);
                 Cookies.set('token', res.data.token, { expires: 365 })
+                dispatch(verify({ name: res.data.data.name }))
                 navigate('/')
             } else {
                 setError(true)

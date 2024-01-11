@@ -8,7 +8,8 @@ import Login from "./pages/User/Login";
 import Signup from "./pages/User/Signup";
 import Dashboard from "./pages/Admin/Dashboard";
 import AdminLogin from "./pages/Admin/Login";
-
+import { store } from './store/store'
+import { Provider } from 'react-redux'
 
 function App() {
   const router = createBrowserRouter([
@@ -30,16 +31,19 @@ function App() {
     },
     {
       path: "/admin/login",
-      element: <AdminLogin/>,
+      element: <AdminLogin />,
     }
 
   ]);
 
   return (
     <>
-      <RouterProvider router={router} />u
+      <Provider store={store}>
+
+        <RouterProvider router={router} />
+      </Provider>
     </>
-  )
+  ) 
 }
 
 export default App
