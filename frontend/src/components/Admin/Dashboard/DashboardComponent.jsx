@@ -18,6 +18,20 @@ function DashboardComponent() {
         })
     }, [])
     const [search, setSearch] = useState("")
+
+    const handleDelete = (userId) => {
+        if (confirm('Are you sure you want to delete this user?')) {
+            axios.get(`${BASEURL}/api/admin/delete?id=${userId}`, {
+                headers:{
+                    Authorization: Cookies.get('token') 
+                }
+            }).then((res)=>{
+                console.log(res);
+                setUsers(users.filter((user)=>user._id!==userId))
+            })
+        }
+
+    }
     return (
         <>
 
@@ -44,7 +58,7 @@ function DashboardComponent() {
                             <tbody>
                                 {
                                     users.map((user, index) => {
-                                        if (user.name.startsWith(search) || search===""||user.email.includes(search)) {
+                                        if (user.name.startsWith(search) || search === "" || user.email.includes(search)) {
                                             return (
                                                 // eslint-disable-next-line react/jsx-key
 
@@ -55,13 +69,16 @@ function DashboardComponent() {
                                                     <td className="d-flex">
                                                         <div>
                                                             <Link to={`/admin/edit/${user._id}`} className="btn btn-primary mx-2" >Edit</Link>
-                                                            <a className="btn btn-danger mx-2"  >Delete</a>
+                                                            <button className="btn btn-danger mx-2" onClick={() => {
+
+                                                                handleDelete(user._id)
+                                                            }}>Delete</button>
                                                         </div>
                                                     </td>
                                                 </tr>
 
                                             )
-                                        }else{
+                                        } else {
                                             return null
                                         }
 
