@@ -22,7 +22,7 @@ function DashboardComponent() {
             <section className=" container-fluid">
                 <div className="col-lg-10 m-auto">
                     <div className="d-flex justify-content-end ">
-                        <a className="btn btn-success m-5" href="/admin/create">Create</a>
+                        <Link className="btn btn-success m-5" to={'/admin/create'}>Create</Link>
                     </div>
                     <div className="table-responsive">
 

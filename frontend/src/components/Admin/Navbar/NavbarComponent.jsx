@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { useSelector } from 'react-redux'
 function NavbarComponent() {
+    const { name, verified } = useSelector((state) => state.user)
     return (
         <>
             <header>
@@ -11,16 +12,30 @@ function NavbarComponent() {
                             <span className="navbar-toggler-icon" />
                         </button>
                         <div className="collapse navbar-collapse col-lg-10" id="navbar">
-                            {'{'}{'{'}!-- <form className="d-flex ">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-light text-white ml-2" type="submit">Search</button>
-                            </form> --{'}'}{'}'}
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <form action="/admin/logout" method="post"><button className="btn text-white" type="submit" style={{ backgroundColor: 'transparent', border: 'none' }}>logout</button></form>
-                                    {'{'}{'{'}!-- <a className="nav-link text-light" aria-current="page" href="/admin/logout">Logout</a> --{'}'}{'}'}
+                           
+                            <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                        <ul className="navbar-nav " >
+
+                            {
+                                !verified&&<a href="">login</a>
+                            }
+
+                            {
+                                verified && <li className="nav-item dropdown px-5">
+                                    <a className="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {name}
+                                    </a>
+
+                                    <ul className="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                                        
+                                        <li><a className="dropdown-item" href="#">logout</a></li>
+                                       
+                                    </ul>
+
                                 </li>
-                            </ul>
+                            }
+                        </ul>
+                    </div>
                         </div>
                     </div>
                 </nav>
