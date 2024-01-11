@@ -12,8 +12,8 @@ function HomeComponent() {
                         <h1 className="text-warning mb-5">
                             Welcome To Home Page
                         </h1>
-                        <form action="/logout" method="post"><button className="btn btn-light btn-block m-auto col-8 col-md-4" type="submit">logout</button></form>
-                        <a type="button" href="/logout" className="btn btn-light btn-block m-auto col-8 col-md-4">Logout</a>
+                        
+                        
                     </div>
                 </div>
             </section>
