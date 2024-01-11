@@ -41,5 +41,19 @@ module.exports = {
                 }
             })
         })
+    },
+    fetchUser:(email)=>{
+        return new Promise((resolve, reject) => {
+            db.get().collection('user').findOne({email:email}).then((result)=>{
+                if(result){
+                    const user={
+                        name:result.name,
+                        email:result.email
+                    }
+                    resolve({success:true,data:user})
+                }
+
+            })
+        })
     }
 }
