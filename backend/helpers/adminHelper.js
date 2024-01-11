@@ -8,6 +8,7 @@ module.exports = {
                 if (result != null) {
                     bcrypt.compare(data.password, result.password).then((result) => {
                         if (result) {
+                            
                             resolve({ success: true })
                         } else {
                             resolve({ success: false })

@@ -2,7 +2,7 @@ var express = require('express');
 const { login, signup, fetchUser } = require('../helpers/userHelper');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
-var secretKey = "secret"
+var secretKey = "secretuser"
 // router.get('/',(req,res)=>{
 // res.json("helo")
 // })
@@ -15,7 +15,7 @@ const verifyLogin = (req, res, next) => {
 
   jwt.verify(token, secretKey, (err, user) => {
     if (err) {
-      return res.status(403).json({ message: 'Error' });
+      return res.status(401).json({ message: 'Unauthorized' });
     }
 
     req.user = user;

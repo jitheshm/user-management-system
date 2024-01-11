@@ -14,7 +14,7 @@ function Auth({ children }) {
         if (verified) {
             setloading(false)
         } else {
-            axios.get(`${BASEURL}/api/auth`, {
+            axios.get(`${BASEURL}/api/admin/auth`, {
                 headers: {
                     Authorization: Cookies.get('token')
                 }
@@ -24,13 +24,15 @@ function Auth({ children }) {
                     console.log("haii");
                     dispatch(verify({ name: res.data.data.name }))
                     
-                }setloading(false)
+                }
+                setloading(false)
  
             }).catch(()=>{
                 setloading(false)
             })
         }
     }, [])
+    
     return (
         <>
             {

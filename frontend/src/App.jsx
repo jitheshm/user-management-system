@@ -11,32 +11,33 @@ import Dashboard from "./pages/Admin/Dashboard";
 import AdminLogin from "./pages/Admin/Login";
 import { store } from './store/store'
 import { Provider } from 'react-redux'
-import Protect from "./components/Protect/Protect";
+import ProtectUser from "./components/User/Protect/Protect";
+import ProtectAdmin from "./components/Admin/Protect/Protect";
 import HomeComponent from "./components/User/Home/HomeComponent";
-import Auth from "./components/User/auth/Auth";
-
+import AuthUser from "./components/User/auth/Auth";
+import AuthAdmin from "./components/Admin/auth/Auth";
   
 export function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Auth><Protect><Home /></Protect></Auth>,
+      element: <AuthUser><ProtectUser><Home /></ProtectUser></AuthUser>,
     },
     {
       path: "/login",
-      element: <Auth><Login /></Auth>,
+      element: <AuthUser><Login /></AuthUser>,
     },
     {
       path: "/signup",
-      element: <Auth><Signup /></Auth>,
+      element: <AuthUser><Signup /></AuthUser>,
     },
     {
       path: "/admin",
-      element: <Dashboard />,
+      element: <AuthAdmin ><ProtectAdmin><Dashboard /></ProtectAdmin></AuthAdmin>
     },
     {
       path: "/admin/login",
-      element: <AdminLogin />,
+      element: <AuthAdmin><AdminLogin /></AuthAdmin>
     }
 
   ]);

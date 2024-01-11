@@ -3,9 +3,9 @@ const { login, getUsers, findUser, updateUser, deleteUser } = require('../helper
 const { signup } = require('../helpers/userHelper');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
-var secretKey = "secret"
+var secretKey = "secretadmin"
 
-const verifyLogin = (req, res) => {
+const verifyLogin = (req, res,next) => {
     const token = req.header('Authorization');
 
     if (!token) {
@@ -14,7 +14,7 @@ const verifyLogin = (req, res) => {
 
     jwt.verify(token, secretKey, (err, user) => {
         if (err) {
-            return res.status(403).json({ message: 'Error' });
+            return res.status(401).json({ message: 'Unauthorized' });
         }
 
         req.user = user;
@@ -22,6 +22,10 @@ const verifyLogin = (req, res) => {
     });
 
 }
+
+router.get('/auth', verifyLogin, (req, res) => {
+    res.json({ success: true, data: req.user })
+  })
 router.get("/", verifyLogin, (req, res) => {
     getUsers().then((users) => {
         res.json({ success: true, data: users })
