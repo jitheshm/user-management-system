@@ -1,6 +1,7 @@
 const db = require('../config/dbConnection')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const { ObjectId } = require('mongodb');
 module.exports = {
     signup: (data) => {
         return new Promise((resolve, reject) => {
@@ -45,15 +46,45 @@ module.exports = {
     fetchUser:(email)=>{
         return new Promise((resolve, reject) => {
             db.get().collection('user').findOne({email:email}).then((result)=>{
-                if(result){
+                if(result){  
                     const user={
                         name:result.name,
-                        email:result.email
+                        email:result.email,
+                        id:result._id
                     }
                     resolve({success:true,data:user})
                 }
 
             })
         })
-    }
+    },
+    updateProfile: (data) => {
+        return new Promise(async(resolve, reject) => {
+            if(data.password!=""){
+                var hash=await bcrypt.hash(data.password, saltRounds)
+                data.password=hash
+            }
+            console.log(data);
+            db.get().collection('user').findOne({ email: data.email, _id: { "$ne": new ObjectId(data.id) } }).then((result) => {
+                if (!result) {
+                    db.get().collection('user').updateOne({ _id: new ObjectId(data.id) }, {
+                        $set: {
+                            name: data.name,
+                            email: data.email,
+                            ...(data.password!="")?{password:data.password}:{}
+                            
+                        }
+                    }).then((res) => {
+                        console.log(res);
+                        resolve()
+                    })
+                }
+                else {
+                    reject("email is already registered")
+                }
+
+
+            })
+        })
+    },
 }

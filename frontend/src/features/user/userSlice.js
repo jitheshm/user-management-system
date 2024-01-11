@@ -17,9 +17,12 @@ export const userSlice = createSlice({
         logout:(state)=>{
             state.name="",
             state.verified=false
+        },
+        update:(state,action)=>{
+            state.name=action.payload.name
         }
     }
 })
 
-export const { verify,logout} = userSlice.actions
+export const { verify,logout,update} = userSlice.actions
 export default userSlice.reducer

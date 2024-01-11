@@ -18,6 +18,7 @@ import AuthUser from "./components/User/auth/Auth";
 import AuthAdmin from "./components/Admin/auth/Auth";
 import Update from "./pages/Admin/Update";
 import CreateUser from "./pages/Admin/CreateUser";
+import Profile from "./components/User/Profile/Profile";
   
 export function App() {
   const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export function App() {
     {
       path: "/signup",
       element: <AuthUser><Signup /></AuthUser>,
+    },
+    {
+      path: "/profile",
+      element: <AuthUser><Profile /></AuthUser>,
     },
     {
       path: "/admin",

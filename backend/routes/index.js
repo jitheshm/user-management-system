@@ -1,5 +1,5 @@
 var express = require('express');
-const { login, signup, fetchUser } = require('../helpers/userHelper');
+const { login, signup, fetchUser, updateProfile } = require('../helpers/userHelper');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var secretKey = "secretuser"
@@ -61,15 +61,28 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.get('/editprofile', verifyLogin, (req, res) => {
+router.get('/profile', verifyLogin, (req, res) => {
   fetchUser(req.user.email).then((result) => {
-    if (result.status) {
+    console.log(result);
+    if (result.success) {
       res.json({ success: true, data: result.data })
     } else {
       res.json({ success: false })
     }
   })
 
+})
+
+router.post('/profile/update',verifyLogin,(req,res)=>{
+  updateProfile(req.body).then(()=>{
+    const user = {
+      ...req.user,
+      name: req.body.name,
+      
+    }
+    const token = jwt.sign(user, secretKey);
+    res.json({success:true,token:token})
+  })
 })
 
 

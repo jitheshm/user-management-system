@@ -4,6 +4,7 @@ import './Navbar.css'
 import { logout } from '../../../features/user/userSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 function NavbarComponent() {
     const { name, verified } = useSelector((state) => state.user)
     const dispatch = useDispatch() 
@@ -29,7 +30,7 @@ function NavbarComponent() {
                                     </a>
 
                                     <ul className="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a className="dropdown-item" href="#">profile</a></li>
+                                        <li><Link to={'/profile'} className="dropdown-item" href="#">profile</Link></li>
                                         <li><button className="dropdown-item" onClick={()=>{
                                             Cookies.remove('token');
                                             dispatch(logout())
