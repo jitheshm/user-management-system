@@ -3,6 +3,22 @@ const { login, signup, fetchUser, updateProfile } = require('../helpers/userHelp
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var secretKey = "secretuser"
+
+
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/');
+  },
+  filename: function (req, file, cb) {
+    const fileExtension = path.extname(file.originalname);
+    cb(null, Date.now() + '.jpg'); // Set the extension to jpg
+  },
+});
+
+const upload = multer({ storage: storage });
 // router.get('/',(req,res)=>{
 // res.json("helo")
 // })
@@ -73,15 +89,20 @@ router.get('/profile', verifyLogin, (req, res) => {
 
 })
 
-router.post('/profile/update',verifyLogin,(req,res)=>{
-  updateProfile(req.body).then(()=>{
+router.post('/profile/update', verifyLogin, upload.single('image'), (req, res) => {
+  //console.log(req.file.path);
+  var imgPath
+  if (req.file) {
+    imgPath = req.file.path
+  }
+  updateProfile(req.body,imgPath).then(() => {
     const user = {
       ...req.user,
       name: req.body.name,
-      
+
     }
     const token = jwt.sign(user, secretKey);
-    res.json({success:true,token:token})
+    res.json({ success: true, token: token })
   })
 })
 

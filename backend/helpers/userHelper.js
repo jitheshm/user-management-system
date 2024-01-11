@@ -58,8 +58,13 @@ module.exports = {
             })
         })
     },
-    updateProfile: (data) => {
+    updateProfile: (data,imgPath) => {
         return new Promise(async(resolve, reject) => {
+            console.log(data);
+            if(imgPath){
+                var imageUrl = `http://localhost:3000/${imgPath.replace('public/', '')}`;
+            }
+            //console.log(imageUrl);
             if(data.password!=""){
                 var hash=await bcrypt.hash(data.password, saltRounds)
                 data.password=hash
@@ -71,6 +76,7 @@ module.exports = {
                         $set: {
                             name: data.name,
                             email: data.email,
+                            img:imageUrl?imageUrl:"",
                             ...(data.password!="")?{password:data.password}:{}
                             
                         }

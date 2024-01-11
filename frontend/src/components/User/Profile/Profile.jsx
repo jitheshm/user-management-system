@@ -9,11 +9,13 @@ function Profile() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [selectedFile, setSelectedFile] = useState(null);
     const [error, setError] = useState(false)
     const [id, setId] = useState("")
     const navigate = useNavigate() 
     const dispatch = useDispatch()
     const { verified } = useSelector((state) => state.user)
+    const [imagePreview, setImagePreview] = useState(null);
     useEffect(() => {
      axios.get(`${BASEURL}/api/profile`, {
             headers: {
@@ -29,14 +31,19 @@ function Profile() {
     }, [])
 
     const handleUpdate=()=>{
-        axios.post(`${BASEURL}/api/profile/update`,{
-            name:name,
-            email:email,
-            password:password,
-            id:id
-        },{
+        const formData = new FormData();
+        if(selectedFile!=null){
+            formData.append('image', selectedFile);
+        }
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('id', id);
+
+        axios.post(`${BASEURL}/api/profile/update`,formData,{
             headers:{
-                Authorization: Cookies.get('token')  
+                Authorization: Cookies.get('token'),
+                'content-type': 'multipart/form-data'
             }
         }).then((res)=>{
             console.log(res.data.success);
@@ -48,6 +55,19 @@ function Profile() {
                 setError(true)
             }
         })
+    }
+    const handleFileChange=(e)=>{
+        setSelectedFile(e.target.files[0]);
+        let file=e.target.files[0]
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+          } else {
+            setImagePreview(null);
+          }
     }
     
     return (
@@ -63,8 +83,8 @@ function Profile() {
                                         <form id="signupForm">
                                             <div className='my-4' >
 
-                                                <div className='m-auto' style={{ display: 'flex', width: '100px', height: '100px', borderRadius: "50px", backgroundImage: `url("https://cdn.vectorstock.com/i/preview-1x/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg")`, backgroundSize: "cover" }}>
-                                                    <input name="files" type="file" title=' ' />
+                                                <div className='m-auto' style={{ display: 'flex', width: '100px', height: '100px', borderRadius: "50px", backgroundImage: imagePreview!=null ? `url(${imagePreview})` :`url("https://cdn.vectorstock.com/i/preview-1x/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg")`, backgroundSize: "cover" }}>
+                                                    <input name="image" type="file" title=' ' onChange={handleFileChange}/>
                                                 </div>
                                             </div>
 
