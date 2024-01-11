@@ -13,21 +13,22 @@ import { store } from './store/store'
 import { Provider } from 'react-redux'
 import Protect from "./components/Protect/Protect";
 import HomeComponent from "./components/User/Home/HomeComponent";
+import Auth from "./components/User/auth/Auth";
 
-function App() {
   
+export function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Protect><Home/></Protect>, 
+      element: <Auth><Protect><Home /></Protect></Auth>,
     },
     {
       path: "/login",
-      element: <Login />,
+      element: <Auth><Login /></Auth>,
     },
     {
       path: "/signup",
-      element: <Signup />,
+      element: <Auth><Signup /></Auth>,
     },
     {
       path: "/admin",
@@ -44,10 +45,12 @@ function App() {
     <>
       <Provider store={store}>
 
-        <RouterProvider router={router} />
+        
+           <RouterProvider router={router} />
+        
       </Provider>
     </>
-  ) 
+  )
 }
 
 export default App

@@ -6,9 +6,9 @@ var secretKey = "secret"
 // router.get('/',(req,res)=>{
 // res.json("helo")
 // })
-const verifyLogin = (req, res) => {
+const verifyLogin = (req, res, next) => {
   const token = req.header('Authorization');
-
+  console.log(token);
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
@@ -23,6 +23,9 @@ const verifyLogin = (req, res) => {
   });
 
 }
+router.get('/auth', verifyLogin, (req, res) => {
+  res.json({ success: true, data: req.user })
+})
 
 router.post('/signup', (req, res) => {
   console.log(req.body);
@@ -62,8 +65,8 @@ router.get('/editprofile', verifyLogin, (req, res) => {
   fetchUser(req.user.email).then((result) => {
     if (result.status) {
       res.json({ success: true, data: result.data })
-    }else{
-      res.json({success:false})
+    } else {
+      res.json({ success: false })
     }
   })
 

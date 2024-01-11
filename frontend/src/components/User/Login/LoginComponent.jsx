@@ -3,7 +3,7 @@ import './Login.css'
 import axios from 'axios'
 import { BASEURL } from '../../../constants/constant.json'
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { verify } from '../../../features/user/userSlice'
 
@@ -71,7 +71,7 @@ function LoginComponent() {
                                                     onClick={handleSubmit}>Login</button>
                                             </div>
                                             <div>
-                                                <p className="text-center text-muted mt-5 mb-0">Don't have an account? <a href="/signup" className="fw-bold text-body"><u>Register here</u></a></p>
+                                                <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to={'/signup'} className="fw-bold text-body"><u>Register here</u></Link></p>
                                             </div>
                                         </form>
                                     </div>
