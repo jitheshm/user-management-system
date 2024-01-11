@@ -66,6 +66,16 @@ router.post('/create', verifyLogin, (req, res) => {
     })
 })
 
+router.get('/edit/:id',verifyLogin,(req,res)=>{
+    // console.log(req.params);
+    
+    findUser(req.params.id).then((user)=>{
+  
+      console.log(user);
+      res.json({success:true,data:user})
+    })
+   
+  })
 
 router.post('/update', verifyLogin, (req, res) => {
     console.log(req.body);

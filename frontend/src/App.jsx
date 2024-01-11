@@ -16,6 +16,7 @@ import ProtectAdmin from "./components/Admin/Protect/Protect";
 import HomeComponent from "./components/User/Home/HomeComponent";
 import AuthUser from "./components/User/auth/Auth";
 import AuthAdmin from "./components/Admin/auth/Auth";
+import Update from "./pages/Admin/Update";
   
 export function App() {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export function App() {
     {
       path: "/admin/login",
       element: <AuthAdmin><AdminLogin /></AuthAdmin>
+    },
+    {
+      path: "/admin/edit/:id",
+      element: <AuthAdmin><Update /></AuthAdmin>
     }
 
   ]);
