@@ -13,9 +13,13 @@ export const userSlice = createSlice({
             console.log(action.payload);
             state.name = action.payload.name 
             state.verified = true
+        },
+        logout:(state)=>{
+            state.name="",
+            state.verified=false
         }
     }
 })
 
-export const { verify} = userSlice.actions
+export const { verify,logout} = userSlice.actions
 export default userSlice.reducer

@@ -1,7 +1,11 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+
+import { logout } from '../../../features/user/userSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import Cookies from 'js-cookie';
 function NavbarComponent() {
     const { name, verified } = useSelector((state) => state.user)
+    const dispatch = useDispatch()  
     return (
         <>
             <header>
@@ -28,7 +32,10 @@ function NavbarComponent() {
 
                                     <ul className="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
                                         
-                                        <li><a className="dropdown-item" href="#">logout</a></li>
+                                        <li><button className="dropdown-item" onClick={()=>{
+                                            Cookies.remove('token');
+                                            dispatch(logout())
+                                        }}>logout</button></li>
                                        
                                     </ul>
 
