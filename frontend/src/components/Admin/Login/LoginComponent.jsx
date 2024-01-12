@@ -15,6 +15,14 @@ function LoginComponent() {
     const dispatch = useDispatch()
     const navigate = useNavigate() 
     const handleSubmit=()=>{
+        if (name.trim() === "") {
+            alert("Please enter your name.");
+            return;
+          }
+          if(password===""){
+            alert("Please enter password");
+            return;
+          }
         axios.post(`${BASEURL}/api/admin/login`, {
             userId: name,
             password: password

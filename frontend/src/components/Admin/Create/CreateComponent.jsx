@@ -12,6 +12,18 @@ function CreateComponent() {
     const navigate = useNavigate()
 
     const handleSubmit = () => {
+        if (name.trim() === "") {
+            alert("Please enter name.");
+            return;
+          }
+          if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+          }   
+          if(password===""){  
+            alert("Please enter password");
+            return;   
+          }
         axios.post(`${BASEURL}/api/admin/create`, {
             name: name,
             email: email,

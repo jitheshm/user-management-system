@@ -10,6 +10,7 @@ function EditComponent() {
     const navigate = useNavigate()
     const { id } = useParams()
     useEffect(() => {
+        
         axios.get(`${BASEURL}/api/admin/edit/${id}`, {
             headers: {
                 Authorization: Cookies.get('token')
@@ -19,9 +20,17 @@ function EditComponent() {
             setName(res.data.data.name)
             setEmail(res.data.data.email)
         })
-    }, [])
+    }, []) 
 
     const handleUpdate = () => {
+        if (name.trim() === "") {
+            alert("Please enter name.");
+            return;
+          }
+          if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+          }
         axios.post(`${BASEURL}/api/admin/update`, {
             id: id,
             name: name,

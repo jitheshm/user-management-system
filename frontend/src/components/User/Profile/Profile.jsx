@@ -26,12 +26,22 @@ function Profile() {
             setName(res.data.data.name)
             setEmail(res.data.data.email)
             setId(res.data.data.id)
-            setImagePreview(res.data.data.img)
+            setImagePreview(res.data.data.img)   
         })
      
     }, [])
 
     const handleUpdate=()=>{
+        if (name.trim() === "") {
+            alert("Please enter your name.");
+            return;
+          }
+        
+          if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+          }
+          
         const formData = new FormData();
         if(selectedFile!=null){
             formData.append('image', selectedFile);

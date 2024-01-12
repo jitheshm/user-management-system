@@ -19,6 +19,16 @@ function LoginComponent() {
     const navigate = useNavigate()
 
     const handleSubmit = () => {
+        
+        
+          if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+          }
+          if(password===""){
+            alert("Please enter password");
+            return;
+          }
         axios.post(`${BASEURL}/api/login`, {
             email: email,
             password: password

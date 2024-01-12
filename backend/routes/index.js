@@ -99,6 +99,7 @@ router.post('/profile/update', verifyLogin, upload.single('image'), (req, res) =
     const user = {
       ...req.user,
       name: req.body.name,
+      email:req.body.email
 
     }
     const token = jwt.sign(user, secretKey);
