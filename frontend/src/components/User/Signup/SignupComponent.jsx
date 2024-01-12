@@ -15,9 +15,13 @@ function SignupComponent() {
             email: email,
             password: password
         }).then((res)=>{
+            console.log(res.data.success);
+            if(res.data.success)
             navigate('/login')
+            else
+            setError(true)
         })
-    }
+    } 
     return (
         <>
             <section className="signupContainer bg-danger py-5">
@@ -29,16 +33,10 @@ function SignupComponent() {
                                     <div className="card-body p-5">
                                         <h2 className="text-uppercase text-center mb-5">Create an account</h2>
                                         <form id="signupForm">
-                                            <div className='my-4' >
-
-                                                <div className='m-auto' style={{ display: 'flex', width: '100px', height: '100px', borderRadius: "50px",  backgroundImage: `url("https://cdn.vectorstock.com/i/preview-1x/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg")`, backgroundSize:"cover" }}>
-                                                    <input name="files" type="file" title=' ' />
-                                                </div>
-                                            </div>
-
-                                            {/* <div className="text-danger">
-                                                <span>error</span>
-                                            </div> */}
+                                            
+                                        {error && <div className="text-danger">
+                                                <span>email id already exist</span>
+                                            </div>}
                                             <div className="form-outline mb-4">
                                                 <label className="form-label" htmlFor="form3Example1cg">Name</label>
                                                 <input type="text" name="name" id="name" className="form-control form-control-lg" pattern="[a-zA-Z][a-zA-Z ]{2,}" required 

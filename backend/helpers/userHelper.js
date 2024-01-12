@@ -47,10 +47,12 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.get().collection('user').findOne({email:email}).then((result)=>{
                 if(result){  
+                    console.log(result);
                     const user={
                         name:result.name,
                         email:result.email,
-                        id:result._id
+                        id:result._id,
+                        img:result.img
                     }
                     resolve({success:true,data:user})
                 }

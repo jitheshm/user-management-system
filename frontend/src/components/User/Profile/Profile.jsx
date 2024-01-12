@@ -26,6 +26,7 @@ function Profile() {
             setName(res.data.data.name)
             setEmail(res.data.data.email)
             setId(res.data.data.id)
+            setImagePreview(res.data.data.img)
         })
      
     }, [])

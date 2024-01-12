@@ -41,12 +41,6 @@ function CreateComponent() {
                                     <div className="card-body p-5">
                                         <h2 className="text-uppercase text-center mb-5">Create an account</h2>
                                         <form id="signupForm">
-                                            <div className='my-4' >
-
-                                                <div className='m-auto' style={{ display: 'flex', width: '100px', height: '100px', borderRadius: "50px", backgroundImage: `url("https://cdn.vectorstock.com/i/preview-1x/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg")`, backgroundSize: "cover" }}>
-                                                    <input name="files" type="file" title=' ' />
-                                                </div>
-                                            </div>
 
                                             {error && <div className="text-danger">
                                                 <span>email id already exist</span>
@@ -78,9 +72,9 @@ function CreateComponent() {
 
                                             <div className="d-flex justify-content-center">
                                                 <button type="button" className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                                                    onClick={handleSubmit}>Register</button>
+                                                    onClick={handleSubmit}>Create</button>
                                             </div>
-                                            <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login" className="fw-bold text-body"><u>Login here</u></a></p>
+                                           
                                         </form>
                                     </div>
                                 </div>

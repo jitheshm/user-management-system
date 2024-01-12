@@ -50,6 +50,7 @@ function DashboardComponent() {
                             <thead>
                                 <tr>
                                     <th scope="col">NO</th>
+                                    <th scope="col">Profile Picture</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Actions</th>
@@ -64,6 +65,7 @@ function DashboardComponent() {
 
                                                 <tr>
                                                     <th scope="row">{index + 1}</th>
+                                                    <td className="w-25"><img src={user.img?user.img:'https://cdn.vectorstock.com/i/preview-1x/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg'} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></td>
                                                     <td className="w-25">{user.name}</td>
                                                     <td className="w-25">{user.email}</td>
                                                     <td className="d-flex">
