@@ -18,7 +18,8 @@ import AuthUser from "./components/User/auth/Auth";
 import AuthAdmin from "./components/Admin/auth/Auth";
 import Update from "./pages/Admin/Update";
 import CreateUser from "./pages/Admin/CreateUser";
-import Profile from "./components/User/Profile/Profile";
+import Profile from "./pages/User/profile";
+
   
 export function App() {
   const router = createBrowserRouter([
@@ -48,11 +49,11 @@ export function App() {
     },
     {
       path: "/admin/edit/:id",
-      element: <AuthAdmin><Update /></AuthAdmin>
+      element: <AuthAdmin><ProtectAdmin><Update /></ProtectAdmin></AuthAdmin>
     },
     {
       path: "/admin/create",
-      element: <AuthAdmin><CreateUser /></AuthAdmin>
+      element: <AuthAdmin><ProtectAdmin><CreateUser /></ProtectAdmin></AuthAdmin>
     }
 
   ]);
